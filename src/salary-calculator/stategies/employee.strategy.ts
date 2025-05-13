@@ -9,6 +9,7 @@ export class EmployeeSalaryStrategy implements SalaryStrategy {
     const workedYears = getFullYearsWorked(staff.joinedAt);
     const bonus = Math.min(0.03 * workedYears, 0.3);
     const bonusMultiplier = 1 + bonus;
-    return staff.baseSalary * bonusMultiplier;
+    const result = staff.baseSalary * bonusMultiplier;
+    return Math.round(result * 100) / 100;
   }
 }
