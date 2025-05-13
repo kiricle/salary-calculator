@@ -12,7 +12,6 @@ export class SalaryCalculatorService {
 
   calculateSalary(staff: Staff) {
     const strategy = this.salaryStrategyFactory.getStrategy(staff.type);
-    staff.joinedAt = new Date(staff.joinedAt);
     return strategy.calculateSalary(staff);
   }
 
@@ -22,8 +21,6 @@ export class SalaryCalculatorService {
       throw new NotFoundException('Staff not found');
     }
 
-    const strategy = this.salaryStrategyFactory.getStrategy(staff.type);
-    staff.joinedAt = new Date(staff.joinedAt);
-    return strategy.calculateSalary(staff);
+    return this.calculateSalary(staff);
   }
 }
