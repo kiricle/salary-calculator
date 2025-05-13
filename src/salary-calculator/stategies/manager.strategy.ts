@@ -1,6 +1,7 @@
 import { Staff } from 'src/staff/entities/staff.entity';
 import { StaffService } from 'src/staff/staff.service';
 import { getFullYearsWorked } from 'src/utils/getFullYearsWorked';
+import { roundToCents } from 'src/utils/roundToCents';
 import { SalaryCalculatorService } from '../salary-calculator.service';
 
 export class ManagerSalaryStrategy {
@@ -29,6 +30,8 @@ export class ManagerSalaryStrategy {
       0,
     );
 
-    return staff.baseSalary * experienceMultiplier + subordinateBonus;
+    return roundToCents(
+      staff.baseSalary * experienceMultiplier + subordinateBonus,
+    );
   }
 }
