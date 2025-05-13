@@ -6,7 +6,7 @@ import { SalaryStrategyFactory } from './stategies/salary-stategy.factory';
 export class SalaryCalculatorService {
   constructor(private readonly salaryStrategyFactory: SalaryStrategyFactory) {}
 
-  getSalary(staff: Staff) {
+  calculateSalary(staff: Staff) {
     const strategy = this.salaryStrategyFactory.getStrategy(staff.type);
     staff.joinedAt = new Date(staff.joinedAt);
     return strategy.calculateSalary(staff);

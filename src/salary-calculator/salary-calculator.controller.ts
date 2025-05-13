@@ -9,7 +9,7 @@ export class SalaryCalculatorController {
   ) {}
 
   @Post('/salary')
-  getSalary(@Body() staff: Staff): number {
-    return this.salaryCalculatorService.getSalary(staff);
+  getSalary(@Body() staff: Staff): number | Promise<number> {
+    return this.salaryCalculatorService.calculateSalary(staff);
   }
 }

@@ -122,6 +122,7 @@ exports.Prisma.StaffScalarFieldEnum = {
   name: 'name',
   joinedAt: 'joinedAt',
   type: 'type',
+  baseSalary: 'baseSalary',
   supervisorId: 'supervisorId'
 };
 

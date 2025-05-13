@@ -15,10 +15,11 @@ datasource db {
 }
 
 model Staff {
-  id       String    @id @default(uuid())
-  name     String
-  joinedAt DateTime  @default(now())
-  type     StaffType
+  id         String    @id @default(uuid())
+  name       String
+  joinedAt   DateTime  @default(now())
+  type       StaffType
+  baseSalary Float
 
   supervisorId String? @map("supervisor_id")
   supervisor   Staff?  @relation("StaffHierarchy", fields: [supervisorId], references: [id])

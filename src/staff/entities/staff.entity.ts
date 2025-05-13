@@ -4,6 +4,9 @@ export interface Staff {
   type: StaffType;
   baseSalary: number;
   joinedAt: Date;
+
+  subordinates?: Staff[];
+  supervisor?: Staff;
 }
 
 export type StaffType = 'SALES' | 'MANAGER' | 'EMPLOYEE';
