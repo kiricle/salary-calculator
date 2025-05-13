@@ -11,8 +11,21 @@ export class StaffService {
       where: {
         supervisorId: staffId,
       },
+      include: {
+        subordinates: true,
+      },
     });
 
     return subordinates;
+  }
+
+  async getStaffById(staffId: string): Promise<Staff | null> {
+    const staff = await this.prisma.staff.findUnique({
+      where: {
+        id: staffId,
+      },
+    });
+
+    return staff;
   }
 }

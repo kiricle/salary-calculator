@@ -1,5 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
-import { Staff } from 'src/staff/entities/staff.entity';
+import { Controller, Get, Param } from '@nestjs/common';
 import { SalaryCalculatorService } from './salary-calculator.service';
 
 @Controller('')
@@ -8,8 +7,8 @@ export class SalaryCalculatorController {
     private readonly salaryCalculatorService: SalaryCalculatorService,
   ) {}
 
-  @Post('/salary')
-  getSalary(@Body() staff: Staff): number | Promise<number> {
-    return this.salaryCalculatorService.calculateSalary(staff);
+  @Get('/salary/:id')
+  getSalary(@Param('id') id: string): number | Promise<number> {
+    return this.salaryCalculatorService.calculateSalaryById(id);
   }
 }
