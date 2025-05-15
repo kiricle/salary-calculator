@@ -1,8 +1,8 @@
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
-import { Staff } from 'src/staff/entities/staff.entity';
-import { StaffService } from 'src/staff/staff.service';
-import { getFullYearsWorked } from 'src/utils/getFullYearsWorked';
-import { roundToCents } from 'src/utils/roundToCents';
+import { Staff } from '../../staff/entities/staff.entity';
+import { StaffService } from '../../staff/staff.service';
+import { getFullYearsWorked } from '../../utils/getFullYearsWorked';
+import { roundToCents } from '../../utils/roundToCents';
 import { SalaryCalculatorService } from '../salary-calculator.service';
 
 @Injectable()

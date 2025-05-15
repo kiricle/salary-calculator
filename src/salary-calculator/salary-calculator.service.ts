@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Staff } from 'src/staff/entities/staff.entity';
-import { StaffService } from 'src/staff/staff.service';
+import { Staff } from '../staff/entities/staff.entity';
+import { StaffService } from '../staff/staff.service';
 import { SalaryStrategyFactory } from './stategies/salary-stategy.factory';
 
 @Injectable()
