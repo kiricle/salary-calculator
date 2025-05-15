@@ -923,8 +923,18 @@ export namespace Prisma {
 
   export type AggregateStaff = {
     _count: StaffCountAggregateOutputType | null
+    _avg: StaffAvgAggregateOutputType | null
+    _sum: StaffSumAggregateOutputType | null
     _min: StaffMinAggregateOutputType | null
     _max: StaffMaxAggregateOutputType | null
+  }
+
+  export type StaffAvgAggregateOutputType = {
+    baseSalary: number | null
+  }
+
+  export type StaffSumAggregateOutputType = {
+    baseSalary: number | null
   }
 
   export type StaffMinAggregateOutputType = {
@@ -932,6 +942,7 @@ export namespace Prisma {
     name: string | null
     joinedAt: Date | null
     type: $Enums.StaffType | null
+    baseSalary: number | null
     supervisorId: string | null
   }
 
@@ -940,6 +951,7 @@ export namespace Prisma {
     name: string | null
     joinedAt: Date | null
     type: $Enums.StaffType | null
+    baseSalary: number | null
     supervisorId: string | null
   }
 
@@ -948,16 +960,26 @@ export namespace Prisma {
     name: number
     joinedAt: number
     type: number
+    baseSalary: number
     supervisorId: number
     _all: number
   }
 
+
+  export type StaffAvgAggregateInputType = {
+    baseSalary?: true
+  }
+
+  export type StaffSumAggregateInputType = {
+    baseSalary?: true
+  }
 
   export type StaffMinAggregateInputType = {
     id?: true
     name?: true
     joinedAt?: true
     type?: true
+    baseSalary?: true
     supervisorId?: true
   }
 
@@ -966,6 +988,7 @@ export namespace Prisma {
     name?: true
     joinedAt?: true
     type?: true
+    baseSalary?: true
     supervisorId?: true
   }
 
@@ -974,6 +997,7 @@ export namespace Prisma {
     name?: true
     joinedAt?: true
     type?: true
+    baseSalary?: true
     supervisorId?: true
     _all?: true
   }
@@ -1016,6 +1040,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: StaffAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: StaffSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: StaffMinAggregateInputType
@@ -1046,6 +1082,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: StaffCountAggregateInputType | true
+    _avg?: StaffAvgAggregateInputType
+    _sum?: StaffSumAggregateInputType
     _min?: StaffMinAggregateInputType
     _max?: StaffMaxAggregateInputType
   }
@@ -1055,8 +1093,11 @@ export namespace Prisma {
     name: string
     joinedAt: Date
     type: $Enums.StaffType
+    baseSalary: number
     supervisorId: string | null
     _count: StaffCountAggregateOutputType | null
+    _avg: StaffAvgAggregateOutputType | null
+    _sum: StaffSumAggregateOutputType | null
     _min: StaffMinAggregateOutputType | null
     _max: StaffMaxAggregateOutputType | null
   }
@@ -1080,6 +1121,7 @@ export namespace Prisma {
     name?: boolean
     joinedAt?: boolean
     type?: boolean
+    baseSalary?: boolean
     supervisorId?: boolean
     supervisor?: boolean | Staff$supervisorArgs<ExtArgs>
     subordinates?: boolean | Staff$subordinatesArgs<ExtArgs>
@@ -1091,6 +1133,7 @@ export namespace Prisma {
     name?: boolean
     joinedAt?: boolean
     type?: boolean
+    baseSalary?: boolean
     supervisorId?: boolean
     supervisor?: boolean | Staff$supervisorArgs<ExtArgs>
   }, ExtArgs["result"]["staff"]>
@@ -1100,6 +1143,7 @@ export namespace Prisma {
     name?: boolean
     joinedAt?: boolean
     type?: boolean
+    baseSalary?: boolean
     supervisorId?: boolean
     supervisor?: boolean | Staff$supervisorArgs<ExtArgs>
   }, ExtArgs["result"]["staff"]>
@@ -1109,10 +1153,11 @@ export namespace Prisma {
     name?: boolean
     joinedAt?: boolean
     type?: boolean
+    baseSalary?: boolean
     supervisorId?: boolean
   }
 
-  export type StaffOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "joinedAt" | "type" | "supervisorId", ExtArgs["result"]["staff"]>
+  export type StaffOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "joinedAt" | "type" | "baseSalary" | "supervisorId", ExtArgs["result"]["staff"]>
   export type StaffInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     supervisor?: boolean | Staff$supervisorArgs<ExtArgs>
     subordinates?: boolean | Staff$subordinatesArgs<ExtArgs>
@@ -1136,6 +1181,7 @@ export namespace Prisma {
       name: string
       joinedAt: Date
       type: $Enums.StaffType
+      baseSalary: number
       supervisorId: string | null
     }, ExtArgs["result"]["staff"]>
     composites: {}
@@ -1566,6 +1612,7 @@ export namespace Prisma {
     readonly name: FieldRef<"Staff", 'String'>
     readonly joinedAt: FieldRef<"Staff", 'DateTime'>
     readonly type: FieldRef<"Staff", 'StaffType'>
+    readonly baseSalary: FieldRef<"Staff", 'Float'>
     readonly supervisorId: FieldRef<"Staff", 'String'>
   }
     
@@ -2038,6 +2085,7 @@ export namespace Prisma {
     name: 'name',
     joinedAt: 'joinedAt',
     type: 'type',
+    baseSalary: 'baseSalary',
     supervisorId: 'supervisorId'
   };
 
@@ -2087,6 +2135,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -2104,6 +2159,7 @@ export namespace Prisma {
     name?: StringFilter<"Staff"> | string
     joinedAt?: DateTimeFilter<"Staff"> | Date | string
     type?: EnumStaffTypeFilter<"Staff"> | $Enums.StaffType
+    baseSalary?: FloatFilter<"Staff"> | number
     supervisorId?: StringNullableFilter<"Staff"> | string | null
     supervisor?: XOR<StaffNullableScalarRelationFilter, StaffWhereInput> | null
     subordinates?: StaffListRelationFilter
@@ -2114,6 +2170,7 @@ export namespace Prisma {
     name?: SortOrder
     joinedAt?: SortOrder
     type?: SortOrder
+    baseSalary?: SortOrder
     supervisorId?: SortOrderInput | SortOrder
     supervisor?: StaffOrderByWithRelationInput
     subordinates?: StaffOrderByRelationAggregateInput
@@ -2127,6 +2184,7 @@ export namespace Prisma {
     name?: StringFilter<"Staff"> | string
     joinedAt?: DateTimeFilter<"Staff"> | Date | string
     type?: EnumStaffTypeFilter<"Staff"> | $Enums.StaffType
+    baseSalary?: FloatFilter<"Staff"> | number
     supervisorId?: StringNullableFilter<"Staff"> | string | null
     supervisor?: XOR<StaffNullableScalarRelationFilter, StaffWhereInput> | null
     subordinates?: StaffListRelationFilter
@@ -2137,10 +2195,13 @@ export namespace Prisma {
     name?: SortOrder
     joinedAt?: SortOrder
     type?: SortOrder
+    baseSalary?: SortOrder
     supervisorId?: SortOrderInput | SortOrder
     _count?: StaffCountOrderByAggregateInput
+    _avg?: StaffAvgOrderByAggregateInput
     _max?: StaffMaxOrderByAggregateInput
     _min?: StaffMinOrderByAggregateInput
+    _sum?: StaffSumOrderByAggregateInput
   }
 
   export type StaffScalarWhereWithAggregatesInput = {
@@ -2151,6 +2212,7 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"Staff"> | string
     joinedAt?: DateTimeWithAggregatesFilter<"Staff"> | Date | string
     type?: EnumStaffTypeWithAggregatesFilter<"Staff"> | $Enums.StaffType
+    baseSalary?: FloatWithAggregatesFilter<"Staff"> | number
     supervisorId?: StringNullableWithAggregatesFilter<"Staff"> | string | null
   }
 
@@ -2159,6 +2221,7 @@ export namespace Prisma {
     name: string
     joinedAt?: Date | string
     type: $Enums.StaffType
+    baseSalary: number
     supervisor?: StaffCreateNestedOneWithoutSubordinatesInput
     subordinates?: StaffCreateNestedManyWithoutSupervisorInput
   }
@@ -2168,6 +2231,7 @@ export namespace Prisma {
     name: string
     joinedAt?: Date | string
     type: $Enums.StaffType
+    baseSalary: number
     supervisorId?: string | null
     subordinates?: StaffUncheckedCreateNestedManyWithoutSupervisorInput
   }
@@ -2177,6 +2241,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: EnumStaffTypeFieldUpdateOperationsInput | $Enums.StaffType
+    baseSalary?: FloatFieldUpdateOperationsInput | number
     supervisor?: StaffUpdateOneWithoutSubordinatesNestedInput
     subordinates?: StaffUpdateManyWithoutSupervisorNestedInput
   }
@@ -2186,6 +2251,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: EnumStaffTypeFieldUpdateOperationsInput | $Enums.StaffType
+    baseSalary?: FloatFieldUpdateOperationsInput | number
     supervisorId?: NullableStringFieldUpdateOperationsInput | string | null
     subordinates?: StaffUncheckedUpdateManyWithoutSupervisorNestedInput
   }
@@ -2195,6 +2261,7 @@ export namespace Prisma {
     name: string
     joinedAt?: Date | string
     type: $Enums.StaffType
+    baseSalary: number
     supervisorId?: string | null
   }
 
@@ -2203,6 +2270,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: EnumStaffTypeFieldUpdateOperationsInput | $Enums.StaffType
+    baseSalary?: FloatFieldUpdateOperationsInput | number
   }
 
   export type StaffUncheckedUpdateManyInput = {
@@ -2210,6 +2278,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: EnumStaffTypeFieldUpdateOperationsInput | $Enums.StaffType
+    baseSalary?: FloatFieldUpdateOperationsInput | number
     supervisorId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -2243,6 +2312,17 @@ export namespace Prisma {
     in?: $Enums.StaffType[]
     notIn?: $Enums.StaffType[]
     not?: NestedEnumStaffTypeFilter<$PrismaModel> | $Enums.StaffType
+  }
+
+  export type FloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
   export type StringNullableFilter<$PrismaModel = never> = {
@@ -2284,7 +2364,12 @@ export namespace Prisma {
     name?: SortOrder
     joinedAt?: SortOrder
     type?: SortOrder
+    baseSalary?: SortOrder
     supervisorId?: SortOrder
+  }
+
+  export type StaffAvgOrderByAggregateInput = {
+    baseSalary?: SortOrder
   }
 
   export type StaffMaxOrderByAggregateInput = {
@@ -2292,6 +2377,7 @@ export namespace Prisma {
     name?: SortOrder
     joinedAt?: SortOrder
     type?: SortOrder
+    baseSalary?: SortOrder
     supervisorId?: SortOrder
   }
 
@@ -2300,7 +2386,12 @@ export namespace Prisma {
     name?: SortOrder
     joinedAt?: SortOrder
     type?: SortOrder
+    baseSalary?: SortOrder
     supervisorId?: SortOrder
+  }
+
+  export type StaffSumOrderByAggregateInput = {
+    baseSalary?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -2342,6 +2433,22 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumStaffTypeFilter<$PrismaModel>
     _max?: NestedEnumStaffTypeFilter<$PrismaModel>
+  }
+
+  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
   }
 
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -2391,6 +2498,14 @@ export namespace Prisma {
 
   export type EnumStaffTypeFieldUpdateOperationsInput = {
     set?: $Enums.StaffType
+  }
+
+  export type FloatFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type StaffUpdateOneWithoutSubordinatesNestedInput = {
@@ -2467,6 +2582,17 @@ export namespace Prisma {
     not?: NestedEnumStaffTypeFilter<$PrismaModel> | $Enums.StaffType
   }
 
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
   export type NestedStringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | null
@@ -2533,6 +2659,22 @@ export namespace Prisma {
     _max?: NestedEnumStaffTypeFilter<$PrismaModel>
   }
 
+  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | null
@@ -2566,6 +2708,7 @@ export namespace Prisma {
     name: string
     joinedAt?: Date | string
     type: $Enums.StaffType
+    baseSalary: number
     supervisor?: StaffCreateNestedOneWithoutSubordinatesInput
   }
 
@@ -2574,6 +2717,7 @@ export namespace Prisma {
     name: string
     joinedAt?: Date | string
     type: $Enums.StaffType
+    baseSalary: number
     supervisorId?: string | null
   }
 
@@ -2587,6 +2731,7 @@ export namespace Prisma {
     name: string
     joinedAt?: Date | string
     type: $Enums.StaffType
+    baseSalary: number
     subordinates?: StaffCreateNestedManyWithoutSupervisorInput
   }
 
@@ -2595,6 +2740,7 @@ export namespace Prisma {
     name: string
     joinedAt?: Date | string
     type: $Enums.StaffType
+    baseSalary: number
     subordinates?: StaffUncheckedCreateNestedManyWithoutSupervisorInput
   }
 
@@ -2623,6 +2769,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: EnumStaffTypeFieldUpdateOperationsInput | $Enums.StaffType
+    baseSalary?: FloatFieldUpdateOperationsInput | number
     supervisor?: StaffUpdateOneWithoutSubordinatesNestedInput
   }
 
@@ -2631,6 +2778,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: EnumStaffTypeFieldUpdateOperationsInput | $Enums.StaffType
+    baseSalary?: FloatFieldUpdateOperationsInput | number
     supervisorId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -2658,6 +2806,7 @@ export namespace Prisma {
     name?: StringFilter<"Staff"> | string
     joinedAt?: DateTimeFilter<"Staff"> | Date | string
     type?: EnumStaffTypeFilter<"Staff"> | $Enums.StaffType
+    baseSalary?: FloatFilter<"Staff"> | number
     supervisorId?: StringNullableFilter<"Staff"> | string | null
   }
 
@@ -2666,6 +2815,7 @@ export namespace Prisma {
     name: string
     joinedAt?: Date | string
     type: $Enums.StaffType
+    baseSalary: number
   }
 
   export type StaffUpdateWithoutSupervisorInput = {
@@ -2673,6 +2823,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: EnumStaffTypeFieldUpdateOperationsInput | $Enums.StaffType
+    baseSalary?: FloatFieldUpdateOperationsInput | number
     subordinates?: StaffUpdateManyWithoutSupervisorNestedInput
   }
 
@@ -2681,6 +2832,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: EnumStaffTypeFieldUpdateOperationsInput | $Enums.StaffType
+    baseSalary?: FloatFieldUpdateOperationsInput | number
     subordinates?: StaffUncheckedUpdateManyWithoutSupervisorNestedInput
   }
 
@@ -2689,6 +2841,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: EnumStaffTypeFieldUpdateOperationsInput | $Enums.StaffType
+    baseSalary?: FloatFieldUpdateOperationsInput | number
   }
 
 
