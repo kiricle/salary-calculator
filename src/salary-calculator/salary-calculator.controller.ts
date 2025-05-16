@@ -11,4 +11,9 @@ export class SalaryCalculatorController {
   getSalary(@Param('id') id: string): number | Promise<number> {
     return this.salaryCalculatorService.calculateSalaryById(id);
   }
+
+  @Get('/salary')
+  getSumAllSalaries() {
+    return this.salaryCalculatorService.calculateSumAllSalaries();
+  }
 }

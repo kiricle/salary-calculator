@@ -23,4 +23,18 @@ export class SalaryCalculatorService {
 
     return this.calculateSalary(staff);
   }
+
+  async calculateSumAllSalaries() {
+    const allStaff = await this.staffService.getAllStaff();
+
+    const promises: Array<Promise<number> | number> = [];
+
+    for (const staff of allStaff) {
+      promises.push(this.calculateSalary(staff));
+    }
+
+    const salaries = await Promise.all(promises);
+
+    return salaries.reduce((sum, salary) => sum + salary, 0);
+  }
 }
