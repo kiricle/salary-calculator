@@ -4,9 +4,10 @@ import { StaffService } from '../../staff/staff.service';
 import { getFullYearsWorked } from '../../utils/getFullYearsWorked';
 import { roundToCents } from '../../utils/roundToCents';
 import { SalaryCalculatorService } from '../salary-calculator.service';
+import { SalaryStrategy } from './salary-strategy.interface';
 
 @Injectable()
-export class ManagerSalaryStrategy {
+export class ManagerSalaryStrategy implements SalaryStrategy {
   private readonly MAX_EXPERIENCE_BONUS = 0.4;
   private readonly EXPERIENCE_BONUS_PER_YEAR = 0.05;
   private readonly SUBORDINATES_BONUS = 0.05;
