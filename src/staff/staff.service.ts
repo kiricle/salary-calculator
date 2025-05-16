@@ -28,4 +28,10 @@ export class StaffService {
 
     return staff;
   }
+
+  async getAllStaff(): Promise<Staff[]> {
+    const allStaff = await this.prisma.staff.findMany();
+
+    return allStaff;
+  }
 }
