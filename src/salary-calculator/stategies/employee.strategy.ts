@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { Staff } from 'src/staff/entities/staff.entity';
-import { getFullYearsWorked } from 'src/utils/getFullYearsWorked';
-import { roundToCents } from 'src/utils/roundToCents';
+import { Staff } from '../../staff/entities/staff.entity';
+import { getFullYearsWorked } from '../../utils/getFullYearsWorked';
+import { roundToCents } from '../../utils/roundToCents';
 import { SalaryStrategy } from './salary-strategy.interface';
 
 @Injectable()

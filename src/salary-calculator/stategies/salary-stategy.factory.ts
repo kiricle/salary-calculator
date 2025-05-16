@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { StaffType } from 'src/staff/entities/staff.entity';
+import { StaffType } from '../../staff/entities/staff.entity';
 import { EmployeeSalaryStrategy } from './employee.strategy';
 import { ManagerSalaryStrategy } from './manager.strategy';
 import { SalaryStrategy } from './salary-strategy.interface';

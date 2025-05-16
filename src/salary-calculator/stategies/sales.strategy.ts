@@ -1,12 +1,13 @@
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
-import { Staff } from 'src/staff/entities/staff.entity';
-import { StaffService } from 'src/staff/staff.service';
-import { getFullYearsWorked } from 'src/utils/getFullYearsWorked';
-import { roundToCents } from 'src/utils/roundToCents';
+import { Staff } from '../../staff/entities/staff.entity';
+import { StaffService } from '../../staff/staff.service';
+import { getFullYearsWorked } from '../../utils/getFullYearsWorked';
+import { roundToCents } from '../../utils/roundToCents';
 import { SalaryCalculatorService } from '../salary-calculator.service';
+import { SalaryStrategy } from './salary-strategy.interface';
 
 @Injectable()
-export class SalesSalaryStrategy {
+export class SalesSalaryStrategy implements SalaryStrategy {
   private readonly SUBORDINATES_BONUS = 0.03;
   private readonly MAX_EXPERIENCE_BONUS = 0.35;
   private readonly EXPERIENCE_BONUS_PER_YEAR = 0.01;
