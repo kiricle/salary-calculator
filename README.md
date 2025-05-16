@@ -1,3 +1,4 @@
+[LINK TO BRIEF DESCRIPTION OF THE SOLUTION](https://docs.google.com/document/d/1c_yGoB7aDL5UbL0y02jzKdiza1fuu42EQNk4G6SIG9w/edit?hl=ru&tab=t.0)
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
 </p>
